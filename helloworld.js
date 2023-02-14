@@ -23,3 +23,14 @@ console.log(arr.map(ele => {
     else
         return ele;
 }))
+
+//spread
+const hobbies = ['Sports', 'Cooking'];
+const hobbies2 = [...hobbies, hobbies[0]='Programming'];
+console.log(hobbies)
+
+//REST
+const toArray = (...args) => {
+    return args;
+}
+console.log(toArray(1,2,3,4));
