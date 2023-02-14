@@ -34,3 +34,11 @@ const toArray = (...args) => {
     return args;
 }
 console.log(toArray(1,2,3,4));
+
+
+//destructuring
+const {name, age} = Student;
+console.log(name, age)
+
+const [h1, h2] = hobbies2;
+console.log(h1, h2);
