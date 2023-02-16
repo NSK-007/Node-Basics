@@ -1,35 +1,31 @@
 const http = require('http')
+const fs = require('fs');
 const server = http.createServer((req, response) => {
-    if(req.url==='/node')
+    response.setHeader('Content-Type', 'text/html');
+    if(req.url==='/')
     {
         response.write('<html>');
         response.write('<body>');
-        response.write('<h1>Welcome to my node js project</h1>');
+        response.write('<form action="/message" method="POST"><input type="text" name="message"><input type="submit" value="Submit"></form>');
         response.write('</body>');
         response.write('</html>');
-        response.end();
+        return response.end();
     }
 
-    if(req.url==='/home'){
-        response.write('<html>');
-        response.write('<body>');
-        response.write('<h1>Welcome home</h1>');
-        response.write('</body>');
-        response.write('</html>');
-        response.end();
+    if(req.url==='/message' && req.method==='POST'){
+        const body = []
+        req.on('data', (chunk) => {
+            body.push(chunk);
+        })
+        req.on('end', () => {
+            const parsedBody = Buffer.concat(body).toString();
+            const message = parsedBody.split('=')[1];
+            fs.writeFileSync('message.txt', message);
+        })
+        response.statusCode = 302;
+        response.setHeader('Location', '/');
+        return response.end();
     }
-    if(req.url==='/about'){
-        response.write('<html>');
-        response.write('<body>');
-        response.write('<h1>Welcome to About Us page</h1>');
-        response.write('</body>');
-        response.write('</html>');
-        response.end();
-    }
-    // setTimeout(() => {
-    //     console.log('Exiting...')
-    //     process.exit();
-    // }, 3000)
 })
 
 server.listen(4000);
