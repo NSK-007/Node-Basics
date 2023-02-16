@@ -4,8 +4,11 @@ const server = http.createServer((req, response) => {
     response.setHeader('Content-Type', 'text/html');
     if(req.url==='/')
     {
+        let readData = fs.readFileSync('message.txt', 'utf8')
+        console.log(readData)
         response.write('<html>');
         response.write('<body>');
+        response.write(`<div>${readData}</div>`)
         response.write('<form action="/message" method="POST"><input type="text" name="message"><input type="submit" value="Submit"></form>');
         response.write('</body>');
         response.write('</html>');
