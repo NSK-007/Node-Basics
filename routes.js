@@ -32,14 +32,14 @@ const requestHandler = (req, response) => {
     }
 }
 
-module.exports = requestHandler;
+// module.exports = requestHandler;
 
-module.exports = {
-    handler : requestHandler,
-    text : 'Some text'
-}
+// module.exports = {
+//     handler : requestHandler,
+//     text : 'Some text'
+// }
 
-module.exports.handler = requestHandler;
-module.exports.text = 'Some Text';
+// module.exports.handler = requestHandler;
+// module.exports.text = 'Some Text';
 
 exports.handler = requestHandler;
